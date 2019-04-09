@@ -55,7 +55,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #b5b5b5;
 }
 
 .logo {

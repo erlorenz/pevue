@@ -1,9 +1,11 @@
 <template>
   <div class="step-item" :class="{ active: isActive }">
-    <span class="icon">
+    <!-- <div class="animate" :class="{ active: isActive }"> -->
+    <span class="icon" :class="{ active: isActive }">
       <font-awesome-icon :icon="icon" />
     </span>
     <span class="text">{{ text }}</span>
+    <!-- </div> -->
     <span v-if="!last" class="arrow">></span>
   </div>
 </template>
@@ -43,9 +45,32 @@ export default {
 .step-item {
   display: flex;
   align-items: center;
+  color: #cbd3d6;
+  transition: color 1s ease;
 
   &.active {
     color: $buttonColor;
+  }
+}
+
+/* .animate {
+  display: flex;
+  align-items: center;
+
+  &.active {
+    animation: active 0.7s forwards;
+  }
+} */
+
+@keyframes active {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -55,6 +80,10 @@ export default {
   @media (min-width: 1025px) {
     margin-right: 0.8rem;
     font-size: 1.2rem;
+  }
+
+  &.active {
+    animation: active 0.7s forwards;
   }
 }
 
