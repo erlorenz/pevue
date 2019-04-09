@@ -5,9 +5,10 @@
     </div>
     <div class="steps">
       <TopbarStepItem
-        v-for="stepItem in stepItems"
+        v-for="(stepItem, index) in stepItems"
         :key="stepItem.text"
         v-bind="stepItem"
+        :index="index"
       ></TopbarStepItem>
     </div>
   </div>

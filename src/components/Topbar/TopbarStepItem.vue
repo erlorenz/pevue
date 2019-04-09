@@ -1,5 +1,5 @@
 <template>
-  <div class="step-item" :class="{ active: isActive }">
+  <div class="step-item" :class="{ active: isActive, slide: startAnimation }">
     <!-- <div class="animate" :class="{ active: isActive }"> -->
     <span class="icon" :class="{ active: isActive }">
       <font-awesome-icon :icon="icon" />
@@ -15,6 +15,10 @@ export default {
   name: 'TopbarStepItem',
 
   props: {
+    index: {
+      type: Number,
+      default: 0,
+    },
     text: {
       type: String,
       default: 'NOPROP',
@@ -33,10 +37,20 @@ export default {
     },
   },
 
+  data() {
+    return {
+      startAnimation: false,
+    };
+  },
+
   computed: {
     isActive() {
       return this.$route.path === this.routePath;
     },
+  },
+
+  mounted() {
+    setTimeout(() => (this.startAnimation = true), this.index * 100);
   },
 };
 </script>
@@ -46,10 +60,17 @@ export default {
   display: flex;
   align-items: center;
   color: #cbd3d6;
-  transition: color 1s ease;
+  transition: color 1s ease, transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-20px);
+  opacity: 0;
 
   &.active {
     color: $buttonColor;
+  }
+
+  &.slide {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -62,18 +83,6 @@ export default {
   }
 } */
 
-@keyframes active {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .icon {
   font-size: 1rem;
 
@@ -83,7 +92,25 @@ export default {
   }
 
   &.active {
-    animation: active 0.7s forwards;
+    animation: active 1.2s forwards;
+  }
+}
+
+@keyframes active {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
