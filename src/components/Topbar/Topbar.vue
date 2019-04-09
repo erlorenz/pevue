@@ -3,15 +3,30 @@
     <div class="logo">
       <img src="@/assets/img/pressexpresslogo.svg" alt="Press Express logo" />
     </div>
-    <div class="steps"></div>
+    <div class="steps">
+      <TopbarStepItem
+        v-for="stepItem in stepItems"
+        :key="stepItem.text"
+        v-bind="stepItem"
+      ></TopbarStepItem>
+    </div>
   </div>
 </template>
 
 <script>
+import stepItems from './stepItems.js';
+import TopbarStepItem from './TopbarStepItem.vue';
+
 export default {
   name: 'Topbar',
-  components: {},
-  props: {},
+  components: {
+    TopbarStepItem,
+  },
+  data() {
+    return {
+      stepItems,
+    };
+  },
 };
 </script>
 
@@ -41,8 +56,6 @@ export default {
   justify-content: center;
   align-items: center;
   color: #b5b5b5;
-  width: 200px;
-  background-color: blue;
 }
 
 .logo {
