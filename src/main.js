@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import Vuelidate from 'vuelidate';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faClock,
@@ -16,6 +17,8 @@ library.add(faClock, faCreditCard, faThumbsUp, faTshirt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
+
+Vue.use(Vuelidate);
 
 new Vue({
   router,

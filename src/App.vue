@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <Topbar />
+    <TheTopbar />
     <div id="spacer" />
-    <Layout />
+    <TheLayout />
   </div>
 </template>
 
 <script>
-import Topbar from '@/components/Topbar/Topbar.vue';
-import Layout from '@/components/Layout.vue';
+import TheTopbar from '@/components/TheTopbar/TheTopbar.vue';
+import TheLayout from '@/components/TheLayout.vue';
 
 export default {
   name: 'App',
   components: {
-    Topbar,
-    Layout,
+    TheTopbar,
+    TheLayout,
   },
 };
 </script>

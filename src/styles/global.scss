@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 // Global Styles
 body,
 ol,
@@ -49,4 +51,13 @@ label {
 
 form {
   width: 100%;
+}
+
+button {
+  border: none;
+  background-color: $buttonColor;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+
 }
