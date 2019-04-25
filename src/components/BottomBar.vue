@@ -15,6 +15,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'BottomBar',
+};
+</script>
+
 <style lang="scss" scoped>
 .bottom-bar {
   position: fixed;

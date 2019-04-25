@@ -17,7 +17,9 @@ export default new Router({
       path: '/garments',
       name: 'garments',
       component: () =>
-        import(/* webpackChunkName: "garments" */ './views/Garments/Garments.vue'),
+        import(
+          /* webpackChunkName: "garments" */ './views/Garments/Garments.vue'
+        ),
     },
     {
       path: '/review',
