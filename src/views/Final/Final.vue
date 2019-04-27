@@ -1,5 +1,5 @@
 <template>
-  <h1>Final page</h1>
+  <div>FINAL</div>
 </template>
 
 <script>
@@ -7,3 +7,5 @@ export default {
   name: 'Final',
 };
 </script>
+
+<style lang="scss" scoped></style>

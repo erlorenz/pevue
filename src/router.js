@@ -10,6 +10,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/schedule',
+    },
+    {
+      path: '/schedule',
       name: 'schedule',
       component: Schedule,
     },
