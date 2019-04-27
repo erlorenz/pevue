@@ -11,7 +11,7 @@
       <label></label>
       <label></label>
       <div></div>
-      <BottomBar :back-clicked="handleBackward" :next-clicked="handleForward" />
+      <BottomBar @back-clicked="handleBackward" @next-clicked="handleForward" />
     </form>
   </div>
 </template>
@@ -32,11 +32,11 @@ export default {
 
   methods: {
     handleForward() {
-      console.log('Forward!');
+      this.$router.push({ name: 'garments' });
     },
 
     handleBackward() {
-      console.log('Backward!');
+      alert('Back to landing');
     },
   },
 };

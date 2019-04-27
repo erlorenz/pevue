@@ -8,3 +8,18 @@ $headingColor: rgb(9, 11, 23);
 $errorColor: #ff3860;
 $errorBackgroundColor: #ffedf1;
 $borderWidth: 1px;
+
+
+// Mixins for media queries
+
+@mixin tablet-up {
+    @media (min-width: 450px) {
+        @content;
+    }
+}
+
+@mixin desktop-up {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
