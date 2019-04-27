@@ -6,7 +6,9 @@
       them before the selected return time. (All times are in Pacific Time)
     </PageInstructions>
     <form>
-      <div></div>
+      <DoubleRadio v-model="pickupDate" />
+      <p>{{ pickupDate }}</p>
+
       <div></div>
       <label></label>
       <label></label>
@@ -20,6 +22,7 @@
 import PageInstructions from '@/components/PageInstructions.vue';
 import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
+import DoubleRadio from '@/components/DoubleRadio.vue';
 
 export default {
   name: 'Schedule',
@@ -28,9 +31,27 @@ export default {
     PageInstructions,
     PageTitle,
     BottomBar,
+    DoubleRadio,
+  },
+
+  data() {
+    return {
+      pickupDate: 'HElloooo',
+      pickupHour: '',
+      returnDate: '',
+      returnHour: '',
+    };
   },
 
   methods: {
+    leftClicked() {
+      console.log('left clicked');
+    },
+
+    rightClicked() {
+      console.log('right clicked');
+    },
+
     handleForward() {
       this.$router.push({ name: 'garments' });
     },
@@ -47,6 +68,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 }
 
 form {

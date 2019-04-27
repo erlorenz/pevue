@@ -29,7 +29,6 @@ const roundedHour =
   getNow().minute < roundingCutoff ? getNow().hour : getNow().hour + 1;
 
 /* PICKUP DATE (returns DateTime objects) */
-
 export const pickupDate = () => {
   if (roundedHour <= lastPickup - pickupDelta)
     return {
@@ -40,7 +39,6 @@ export const pickupDate = () => {
 };
 
 /* PICKUP TIMES (returns array of DateTime objects) */
-
 export const pickupTimes = selectedPickupDateUnixString => {
   if (!selectedPickupDateUnixString) return [];
 
