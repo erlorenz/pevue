@@ -1,6 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Schedule from './views/Schedule/Schedule.vue';
+import Schedule from './pages/Schedule/Schedule.vue';
+import OrderLayout from './layouts/OrderLayout.vue';
+
+// Lazy Loaded
+const Garments = () =>
+  import(/* webpackChunkName: "Garments" */ './pages/Garments/Garments.vue');
+const Review = () =>
+  import(/* webpackChunkName: "Review" */ './pages/Review/Review.vue');
+const Final = () =>
+  import(/* webpackChunkName: "Final" */ './pages/Final/Final.vue');
+const Success = () =>
+  import(/* webpackChunkName: "Success" */ './pages/Success/Success.vue');
+const NotFound = () =>
+  import(/* webpackChunkName: "NotFound" */ './pages/NotFound.vue');
 
 Vue.use(Router);
 
@@ -15,38 +28,43 @@ export default new Router({
     {
       path: '/schedule',
       name: 'schedule',
-      component: Schedule,
+      components: {
+        default: Schedule,
+        layout: OrderLayout,
+      },
     },
     {
       path: '/garments',
       name: 'garments',
-      component: () =>
-        import(
-          /* webpackChunkName: "garments" */ './views/Garments/Garments.vue'
-        ),
+      components: {
+        default: Garments,
+        layout: OrderLayout,
+      },
     },
     {
       path: '/review',
       name: 'review',
-      component: () =>
-        import(/* webpackChunkName: "review" */ './views/Review/Review.vue'),
+      components: {
+        default: Review,
+        layout: OrderLayout,
+      },
     },
     {
       path: '/final',
       name: 'final',
-      component: () =>
-        import(/* webpackChunkName: "final" */ './views/Final/Final.vue'),
+      components: {
+        default: Final,
+        layout: OrderLayout,
+      },
     },
     {
       path: '/success',
       name: 'success',
-      component: () =>
-        import(/* webpackChunkName: "success" */ './views/Success/Success.vue'),
+      component: Success,
     },
     {
       path: '*',
-      name: '404',
-      component: () => import(/* webpackChunkName: "404" */ './views/404.vue'),
+      component: NotFound,
     },
   ],
 });

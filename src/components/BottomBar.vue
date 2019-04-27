@@ -3,10 +3,19 @@
     <div class="spacer" />
     <div class="bottom-bar">
       <div class="container">
-        <button class="back-button" type="button" onClick="{goBack}">
-          <span class="left-arrow">&lt;</span>Back
+        <button
+          class="back-button button"
+          type="button"
+          @click="$emit('back-clicked')"
+        >
+          <span class="left-arrow">&lt;</span>
+          Back
         </button>
-        <button class="forward-button" type="button" onClick="{goNext}">
+        <button
+          class="forward-button button"
+          type="button"
+          @click="$emit('next-clicked')"
+        >
           Next
           <span class="right-arrow">></span>
         </button>
@@ -50,9 +59,11 @@ export default {
 }
 
 .container {
-  display: flex;
+  display: grid;
   width: 80%;
   height: 60%;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
 
   @media (min-width: 500px) {
     width: 50%;
@@ -63,10 +74,13 @@ export default {
   }
 }
 
-.forward-button {
-  background-color: $buttonColor;
-  cursor: pointer;
+.forward-button,
+.back-button {
+  width: 100%;
+  height: 100%;
+}
 
+.forward-button {
   &:disabled {
     background-color: #b1ced4;
     cursor: default;

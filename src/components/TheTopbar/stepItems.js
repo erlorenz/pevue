@@ -2,7 +2,7 @@ const stepItems = [
   {
     icon: 'clock',
     text: 'Schedule',
-    routePath: '/',
+    routePath: '/schedule',
   },
   {
     icon: 'tshirt',

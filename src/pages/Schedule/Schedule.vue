@@ -11,7 +11,7 @@
       <label></label>
       <label></label>
       <div></div>
-      <BottomBar />
+      <BottomBar :back-clicked="handleBackward" :next-clicked="handleForward" />
     </form>
   </div>
 </template>
@@ -23,10 +23,21 @@ import BottomBar from '@/components/BottomBar.vue';
 
 export default {
   name: 'Schedule',
+
   components: {
     PageInstructions,
     PageTitle,
     BottomBar,
+  },
+
+  methods: {
+    handleForward() {
+      console.log('Forward!');
+    },
+
+    handleBackward() {
+      console.log('Backward!');
+    },
   },
 };
 </script>

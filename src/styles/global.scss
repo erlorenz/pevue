@@ -53,11 +53,15 @@ form {
   width: 100%;
 }
 
-button {
+.button {
   border: none;
   background-color: $buttonColor;
   color: white;
   cursor: pointer;
   width: 100%;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 1rem;
 }
