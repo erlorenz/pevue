@@ -1,63 +1,46 @@
 <template>
   <div class="DoubleRadio">
     <label class="label">{{ label }}</label>
-    <div v-if="!rightValue" class="placeholder"></div>
-    <div v-if="rightValue" class="container">
+    <div class="container">
       <label
-        v-if="leftValue"
         for="leftButton"
         class="radio-label"
-        :class="{ selected: value === leftValue }"
+        :class="{ selected: value === values[0] }"
         @click="leftClicked"
       >
         <input
           id="leftButton"
           type="radio"
-          :checked="value === leftValue"
-          :value="leftValue"
+          :checked="value === values[0]"
+          :value="values[0]"
           class="hidden"
           @change="leftClicked"
         />
-        <RadioButton :selected="value === leftValue" />
-        <span class="radio-text small">
-          <span v-if="isToday">Today,</span>
-          <span v-if="!isToday">{{ times.val1.toFormat('EEE') }}</span>
-          {{ ' ' + times.val1.toFormat('M/d') }}
-        </span>
-        <span class="radio-text big">
-          <span v-if="isToday">Today,</span>
-          <span v-if="!isToday">{{ times.val1.toFormat('EEEE') }}</span>
-          {{ ' ' + times.val1.toFormat('M/d') }}
-        </span>
+        <RadioButton :selected="value === values[0]" />
+        <span class="radio-text">{{ leftText }}</span>
       </label>
       <label
         for="rightButton"
         class="radio-label"
-        :class="{ selected: value === rightValue }"
+        :class="{ selected: value === values[1] }"
         @click="rightClicked"
       >
         <input
           id="rightButton"
           type="radio"
-          :checked="value === rightValue"
-          :value="rightValue"
+          :checked="value === values[1]"
+          :value="values[1]"
           class="hidden"
           @change="rightClicked"
         />
-        <RadioButton :selected="value === rightValue" />
-        <span class="radio-text big">{{
-          times.val2.toFormat('EEEE, M/d')
-        }}</span>
-        <span class="radio-text small">
-          {{ times.val2.toFormat('EEE, M/d') }}
-        </span>
+        <RadioButton :selected="value === values[1]" />
+        <span class="radio-text">{{ rightText }}</span>
       </label>
     </div>
   </div>
 </template>
 
 <script>
-import { DateTime } from 'luxon';
 import RadioButton from '@/components/RadioButton';
 
 export default {
@@ -77,42 +60,31 @@ export default {
       type: String,
       required: true,
     },
-    times: {
-      type: Object,
-      default: () => ({}),
-    },
     label: {
+      type: String,
+      required: true,
+    },
+    values: {
+      type: Array,
+      required: true,
+    },
+    leftText: {
+      type: String,
+      required: true,
+    },
+    rightText: {
       type: String,
       required: true,
     },
   },
 
-  computed: {
-    leftValue() {
-      if (this.times && this.times.val1)
-        return this.times.val1.valueOf().toString();
-      return null;
-    },
-
-    rightValue() {
-      if (this.times && this.times.val2) {
-        return this.times.val2.valueOf().toString();
-      }
-      return null;
-    },
-
-    isToday() {
-      return this.times.val1.day === DateTime.local().day;
-    },
-  },
-
   methods: {
     leftClicked() {
-      this.$emit('change', this.leftValue);
+      this.$emit('change', this.values[0]);
     },
 
     rightClicked() {
-      this.$emit('change', this.rightValue);
+      this.$emit('change', this.values[1]);
     },
   },
 };

@@ -8,7 +8,7 @@
     </PageInstructions>
     <form class="schedule-form" @submit.prevent="handleForward">
       <!-- Only include starched option if there is a dress shirt -->
-      <DoubleRadioYesNo
+      <DoubleRadio
         v-if="includesShirt"
         v-model="$v.starched.$model"
         :values="['light', 'none']"
@@ -36,7 +36,7 @@
 import PageInstructions from '@/components/PageInstructions.vue';
 import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
-import DoubleRadioYesNo from '@/components/DoubleRadioYesNo.vue';
+import DoubleRadio from '@/components/DoubleRadio.vue';
 import InputGroup from '@/components/InputGroup';
 import { ADD_SCHEDULE } from '../../store/schedule';
 // import ShowCode from '@/components/ShowCode';
@@ -49,7 +49,7 @@ export default {
     PageInstructions,
     PageTitle,
     BottomBar,
-    DoubleRadioYesNo,
+    DoubleRadio,
     InputGroup,
     // ShowCode,
   },

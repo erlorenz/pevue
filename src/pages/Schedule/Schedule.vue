@@ -6,7 +6,7 @@
       them before the selected return time. (All times are in Pacific Time)
     </PageInstructions>
     <form class="schedule-form" @submit.prevent="handleForward">
-      <DoubleRadio
+      <DoubleRadioDays
         v-model="$v.formData.pickupDate.$model"
         label="Pickup Date"
         :times="pickupDates"
@@ -16,7 +16,7 @@
         label="Pickup Time"
         :times="pickupHours"
       />
-      <DoubleRadio
+      <DoubleRadioDays
         v-model="$v.formData.returnDate.$model"
         label="Return Date"
         :times="returnDates"
@@ -61,7 +61,7 @@
 import PageInstructions from '@/components/PageInstructions.vue';
 import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
-import DoubleRadio from '@/components/DoubleRadio.vue';
+import DoubleRadioDays from '@/components/DoubleRadioDays.vue';
 import {
   pickupDate,
   pickupTimes,
@@ -82,7 +82,7 @@ export default {
     PageInstructions,
     PageTitle,
     BottomBar,
-    DoubleRadio,
+    DoubleRadioDays,
     RadioGroup,
     InputGroup,
     // ShowCode,
