@@ -15,11 +15,7 @@
         class="hidden"
         @change="leftClicked"
       />
-      <div class="radio">
-        <div class="outer-circle">
-          <div class="inner-circle"></div>
-        </div>
-      </div>
+      <RadioButton :selected="value === leftValue" />
       <span class="radio-text">
         <span v-if="isToday">Today,</span>
         <span v-if="!isToday">{{ times.val1.toFormat('EEE') }}</span>
@@ -40,15 +36,11 @@
         class="hidden"
         @change="rightClicked"
       />
-      <div class="radio">
-        <div class="outer-circle">
-          <div class="inner-circle"></div>
-        </div>
-      </div>
+      <RadioButton :selected="value === rightValue" />
       <span class="radio-text big">{{ times.val2.toFormat('EEEE, M/d') }}</span>
-      <span class="radio-text small">{{
-        times.val2.toFormat('EEE, M/d')
-      }}</span>
+      <span class="radio-text small">
+        {{ times.val2.toFormat('EEE, M/d') }}
+      </span>
     </label>
   </div>
 </template>
@@ -56,8 +48,14 @@
 <script>
 import { pickupDate } from '../utils/customerTimes';
 import { DateTime } from 'luxon';
+import RadioButton from '@/components/RadioButton';
+
 export default {
   name: 'DoubleRadio',
+
+  components: {
+    RadioButton,
+  },
 
   model: {
     prop: 'value',
@@ -124,13 +122,6 @@ export default {
   &.selected {
     // border-color: $buttonColor;
     box-shadow: 0 0 4px $buttonColor;
-    & .outer-circle {
-      border-color: $buttonColor;
-    }
-
-    & .inner-circle {
-      opacity: 1;
-    }
   }
 }
 
@@ -160,30 +151,5 @@ export default {
 
 .hidden {
   display: none;
-}
-
-.radio {
-  position: absolute;
-  left: 15px;
-  height: 25px;
-  width: 25px;
-}
-
-.outer-circle {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  border: 3px solid $formBorderColor;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.inner-circle {
-  height: 65%;
-  width: 65%;
-  border-radius: 50%;
-  background-color: $buttonColor;
-  opacity: 0;
 }
 </style>
