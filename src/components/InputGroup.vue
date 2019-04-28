@@ -1,5 +1,5 @@
 <template>
-  <div class="InputGroup">
+  <div class="InputGroup" :class="{ error: error }">
     <label :for="name" class="label">{{ label }}</label>
     <input
       :id="name"
@@ -9,6 +9,7 @@
       :value="value"
       @input="handleInput"
     />
+    <label class="errorMessage">Please fill out your room number.</label>
   </div>
 </template>
 
@@ -32,6 +33,10 @@ export default {
     },
     label: {
       type: String,
+      required: true,
+    },
+    error: {
+      type: Boolean,
       required: true,
     },
   },
@@ -65,6 +70,23 @@ export default {
     outline: none;
     border: 2px solid lightgray;
     box-shadow: 0 0 2px lightgray;
+  }
+}
+
+.errorMessage {
+  display: none;
+  color: $errorColor;
+  font-size: $formLabelSize;
+  margin-top: 5px;
+}
+
+.error {
+  .input {
+    border-color: $errorColor;
+  }
+
+  .errorMessage {
+    display: block;
   }
 }
 </style>

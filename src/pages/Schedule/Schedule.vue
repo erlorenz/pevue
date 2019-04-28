@@ -44,8 +44,9 @@
         v-model="$v.formData.room.$model"
         name="room"
         label="Room Number"
+        :error="$v.formData.room.$error"
       />
-      <ShowCode>{{ $v }}</ShowCode>
+      <!-- <ShowCode>{{ $v }}</ShowCode> -->
       <BottomBar
         :disabled="$v.formData.$invalid"
         @back-clicked="handleBack"
@@ -70,7 +71,7 @@ import RadioGroup from '@/components/RadioGroup';
 import InputGroup from '@/components/InputGroup';
 import hotelList from '@/utils/hotelList.js';
 import { ADD_SCHEDULE } from '../../store/schedule';
-import ShowCode from '@/components/ShowCode';
+// import ShowCode from '@/components/ShowCode';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
@@ -83,7 +84,7 @@ export default {
     DoubleRadio,
     RadioGroup,
     InputGroup,
-    ShowCode,
+    // ShowCode,
   },
 
   data() {
