@@ -6,13 +6,27 @@
       them before the selected return time. (All times are in Pacific Time)
     </PageInstructions>
     <form>
-      <DoubleRadio v-model="pickupDate" />
-      <p>{{ pickupDate }}</p>
+      <DoubleRadio
+        v-model="pickupDate"
+        label="Pickup Date"
+        :times="pickupDates"
+      />
+      <RadioGroup
+        v-model="pickupHour"
+        label="Pickup Time"
+        :times="pickupHours"
+      />
+      <DoubleRadio
+        v-model="returnDate"
+        label="Return Date"
+        :times="returnDates"
+      />
+      <RadioGroup
+        v-model="returnHour"
+        label="Return Time"
+        :times="returnHours"
+      />
 
-      <div></div>
-      <label></label>
-      <label></label>
-      <div></div>
       <BottomBar @back-clicked="handleBackward" @next-clicked="handleForward" />
     </form>
   </div>
@@ -23,6 +37,13 @@ import PageInstructions from '@/components/PageInstructions.vue';
 import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import DoubleRadio from '@/components/DoubleRadio.vue';
+import {
+  pickupDate,
+  pickupTimes,
+  returnDate,
+  returnTimes,
+} from '@/utils/customerTimes';
+import RadioGroup from '@/components/RadioGroup';
 
 export default {
   name: 'Schedule',
@@ -32,15 +53,31 @@ export default {
     PageTitle,
     BottomBar,
     DoubleRadio,
+    RadioGroup,
   },
 
   data() {
     return {
-      pickupDate: 'HElloooo',
+      pickupDate: '',
       pickupHour: '',
       returnDate: '',
       returnHour: '',
     };
+  },
+
+  computed: {
+    pickupDates() {
+      return pickupDate();
+    },
+    pickupHours() {
+      return pickupTimes(this.pickupDate);
+    },
+    returnDates() {
+      return returnDate(this.pickupHour);
+    },
+    returnHours() {
+      return returnTimes(this.returnDate, this.pickupHour);
+    },
   },
 
   methods: {
@@ -74,5 +111,8 @@ export default {
 form {
   max-width: 450px;
   font-size: 0.8rem;
+  display: grid;
+  grid-template-rows: repeat(6, max-content);
+  grid-row-gap: 1.5rem;
 }
 </style>
