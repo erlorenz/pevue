@@ -18,6 +18,7 @@
       :name="name"
       :value="value"
       @input="handleInput"
+      @change="handleChange"
     />
     <label class="errorMessage">{{ errorMessage }}</label>
   </div>
@@ -62,6 +63,9 @@ export default {
   methods: {
     handleInput(e) {
       this.$emit('input', e.target.value);
+    },
+    handleChange(e) {
+      this.$emit('change', e.target.value);
     },
   },
 };

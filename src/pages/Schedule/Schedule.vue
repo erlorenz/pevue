@@ -133,7 +133,6 @@ export default {
   methods: {
     handleForward() {
       const payload = this.formData;
-      console.log(this.$v);
       if (!this.$v.$invalid) {
         this.$store.commit(ADD_SCHEDULE, payload);
         this.$router.push({ name: 'garments' });
