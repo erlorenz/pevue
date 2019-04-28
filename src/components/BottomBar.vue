@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="spacer" />
     <div class="bottom-bar">
       <div class="container">
         <button

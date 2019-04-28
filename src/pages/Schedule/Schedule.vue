@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <main class="Schedule">
     <PageTitle>Where are we going?</PageTitle>
     <PageInstructions>
       We will pick your garments up after the selected pickup time and return
@@ -42,7 +42,7 @@
         @next-clicked="handleForward"
       />
     </form>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -130,12 +130,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.Schedule {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  min-height: 100vh;
+  height: 100%;
+  background-color: $backgroundColor;
 }
 
 .schedule-form {

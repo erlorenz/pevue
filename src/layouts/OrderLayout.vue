@@ -1,10 +1,7 @@
 <template>
   <div class="layout">
+    <router-view />
     <TheTopbar />
-    <div class="spacer" />
-    <main>
-      <router-view />
-    </main>
   </div>
 </template>
 
@@ -23,18 +20,11 @@ export default {
 .layout {
   width: 100%;
   min-height: 100vh;
-  background-color: $backgroundColor;
-  display: grid;
-  grid-template-rows: 4rem 1fr;
+  background: $backgroundColor;
+  padding: 4rem 0;
 
-  @media (min-width: 1025px) {
-    grid-template-rows: 5rem 1fr;
+  @include desktop-up {
+    padding: 5rem 0;
   }
-}
-
-.spacer {
-  background-color: white;
-  width: 100%;
-  height: 100%;
 }
 </style>
