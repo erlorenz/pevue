@@ -7,26 +7,31 @@
     </PageInstructions>
     <form class="schedule-form" @submit.prevent="handleForward">
       <DoubleRadio
-        v-model="formData.pickupDate"
+        v-model="$v.formData.pickupDate.$model"
         label="Pickup Date"
         :times="pickupDates"
       />
       <RadioGroup
-        v-model="formData.pickupHour"
+        v-model="$v.formData.pickupHour.$model"
         label="Pickup Time"
         :times="pickupHours"
       />
       <DoubleRadio
-        v-model="formData.returnDate"
+        v-model="$v.formData.returnDate.$model"
         label="Return Date"
         :times="returnDates"
       />
       <RadioGroup
-        v-model="formData.returnHour"
+        v-model="$v.formData.returnHour.$model"
         label="Return Time"
         :times="returnHours"
       />
-      <select id="hotel" v-model="formData.hotel" name="hotel" class="select">
+      <select
+        id="hotel"
+        v-model="$v.formData.hotel.$model"
+        name="hotel"
+        class="select"
+      >
         <option
           v-for="hotelName in hotelList"
           :key="hotelName"
@@ -35,9 +40,14 @@
           >{{ hotelName }}</option
         >
       </select>
-      <InputGroup v-model="formData.room" name="room" label="Room Number" />
+      <InputGroup
+        v-model="$v.formData.room.$model"
+        name="room"
+        label="Room Number"
+      />
+      <ShowCode>{{ $v }}</ShowCode>
       <BottomBar
-        :disabled="!isFilledOut"
+        :disabled="$v.formData.$invalid"
         @back-clicked="handleBack"
         @next-clicked="handleForward"
       />
@@ -60,6 +70,8 @@ import RadioGroup from '@/components/RadioGroup';
 import InputGroup from '@/components/InputGroup';
 import hotelList from '@/utils/hotelList.js';
 import { ADD_SCHEDULE } from '../../store/schedule';
+import ShowCode from '@/components/ShowCode';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'Schedule',
@@ -71,6 +83,7 @@ export default {
     DoubleRadio,
     RadioGroup,
     InputGroup,
+    ShowCode,
   },
 
   data() {
@@ -84,6 +97,17 @@ export default {
         room: '',
       },
     };
+  },
+
+  validations: {
+    formData: {
+      pickupDate: { required },
+      pickupHour: { required },
+      returnDate: { required },
+      returnHour: { required },
+      hotel: { required },
+      room: { required },
+    },
   },
 
   computed: {
@@ -101,17 +125,6 @@ export default {
     },
     hotelList() {
       return hotelList.sort();
-    },
-
-    isFilledOut() {
-      return !!(
-        this.formData.pickupDate &&
-        this.formData.pickupHour &&
-        this.formData.returnDate &&
-        this.formData.returnHour &&
-        this.formData.hotel &&
-        this.formData.room
-      );
     },
   },
 
@@ -169,5 +182,10 @@ export default {
   &:focus {
     outline: none;
   }
+}
+
+.ShowCode {
+  position: absolute;
+  left: 0;
 }
 </style>
