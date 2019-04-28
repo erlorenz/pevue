@@ -12,7 +12,11 @@ const garments = {
         0,
       );
     },
+    includesShirt(state) {
+      return !!state.garments.find(garment => garment.slug === 'shirt');
+    },
   },
+
   mutations: {
     [ADD_GARMENT](state, payload) {
       // Find the index of the matching item, or return -1

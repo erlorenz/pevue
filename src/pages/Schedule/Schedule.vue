@@ -45,6 +45,7 @@
         name="room"
         label="Room Number"
         :error="$v.formData.room.$error"
+        error-message="Please fill in your room number."
       />
       <!-- <ShowCode>{{ $v }}</ShowCode> -->
       <BottomBar
@@ -132,8 +133,13 @@ export default {
   methods: {
     handleForward() {
       const payload = this.formData;
-      this.$store.commit(ADD_SCHEDULE, payload);
-      this.$router.push({ name: 'garments' });
+      console.log(this.$v);
+      if (!this.$v.$invalid) {
+        this.$store.commit(ADD_SCHEDULE, payload);
+        this.$router.push({ name: 'garments' });
+      } else {
+        console.log('Cant submit');
+      }
     },
 
     handleBack() {

@@ -13,7 +13,11 @@ const schedule = {
     },
   },
 
-  getters: {},
+  getters: {
+    scheduleCompleted(state) {
+      return !Object.values(state.schedule).includes('');
+    },
+  },
 
   mutations: {
     [ADD_SCHEDULE](state, payload) {

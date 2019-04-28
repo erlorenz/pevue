@@ -1,15 +1,25 @@
 <template>
   <div class="InputGroup" :class="{ error: error }">
     <label :for="name" class="label">{{ label }}</label>
-    <input
+    <textarea
+      v-if="textarea"
       :id="name"
-      class="input"
+      class="text-area"
+      :name="name"
+      :value="value"
+      rows="3"
+      @input="handleInput"
+    />
+    <input
+      v-if="!textarea"
+      :id="name"
       :type="type"
+      class="input"
       :name="name"
       :value="value"
       @input="handleInput"
     />
-    <label class="errorMessage">Please fill out your room number.</label>
+    <label class="errorMessage">{{ errorMessage }}</label>
   </div>
 </template>
 
@@ -37,7 +47,15 @@ export default {
     },
     error: {
       type: Boolean,
-      required: true,
+      default: false,
+    },
+    textarea: {
+      type: Boolean,
+      default: false,
+    },
+    errorMessage: {
+      type: String,
+      default: 'No error message ',
     },
   },
 
@@ -57,7 +75,8 @@ export default {
   display: block;
 }
 
-.input {
+.input,
+.text-area {
   height: $formElementHeight;
   width: 100%;
   border-radius: 4px;
@@ -71,6 +90,11 @@ export default {
     border: 2px solid lightgray;
     box-shadow: 0 0 2px lightgray;
   }
+}
+
+.text-area {
+  height: auto;
+  padding: 1rem;
 }
 
 .errorMessage {
