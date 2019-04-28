@@ -58,6 +58,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.GarmentsCart {
+  background-color: white;
+  padding: 1rem;
+  width: 100%;
+
+  @include desktop-up {
+    padding: 1.8rem;
+  }
+}
+
 .head {
   border-bottom: 1px solid lightgray;
   padding: 0.3rem;

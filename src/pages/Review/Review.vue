@@ -5,12 +5,19 @@
       Review your selected times and garments - you can go back to edit by
       clicking on the times and chosen garments below.
       <br />Also choose any available options and add special instructions.
+      <br />Terms and conditions are at the bottom.
     </PageInstructions>
-    <form class="schedule-form" @submit.prevent="handleForward">
+    <router-link :to="{ name: 'schedule' }" class="link">
+      <ReviewSchedule />
+    </router-link>
+    <router-link :to="{ name: 'garments' }" class="link">
+      <GarmentsCart />
+    </router-link>
+    <form class="review-form" @submit.prevent="handleForward">
       <!-- Only include starched option if there is a dress shirt -->
       <DoubleRadio
         v-if="includesShirt"
-        v-model="$v.starched.$model"
+        v-model="$v.starch.$model"
         :values="['light', 'none']"
         left-text="Light"
         right-text="None"
@@ -22,7 +29,6 @@
         name="special-instructions"
         label="Add any special instructions"
       />
-      <!-- <ShowCode>{{ $v }}</ShowCode> -->
       <BottomBar
         :disabled="$v.$invalid"
         @back-clicked="handleBack"
@@ -38,9 +44,10 @@ import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import DoubleRadio from '@/components/DoubleRadio.vue';
 import InputGroup from '@/components/InputGroup';
-import { ADD_SCHEDULE } from '../../store/schedule';
-// import ShowCode from '@/components/ShowCode';
+import { ADD_OPTIONS } from '../../store/options';
 import { required } from 'vuelidate/lib/validators';
+import GarmentsCart from '@/components/GarmentsCart/GarmentsCart';
+import ReviewSchedule from '@/components/ReviewSchedule';
 
 export default {
   name: 'Review',
@@ -51,18 +58,19 @@ export default {
     BottomBar,
     DoubleRadio,
     InputGroup,
-    // ShowCode,
+    GarmentsCart,
+    ReviewSchedule,
   },
 
   data() {
     return {
       specialInstructions: '',
-      starched: 'light',
+      starch: 'light',
     };
   },
 
   validations: {
-    starched: { required },
+    starch: { required },
   },
 
   computed: {
@@ -73,8 +81,11 @@ export default {
 
   methods: {
     handleForward() {
-      const payload = this.formData;
-      this.$store.commit(ADD_SCHEDULE, payload);
+      const payload = {
+        specialInstructions: this.specialInstructions,
+        starch: this.starch,
+      };
+      this.$store.commit(ADD_OPTIONS, payload);
       this.$router.push({ name: 'final' });
     },
 
@@ -95,40 +106,21 @@ export default {
   background-color: $backgroundColor;
 }
 
-.schedule-form {
+.GarmentsCart {
+  pointer-events: none;
+}
+
+.link {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 1.5rem;
+}
+
+.review-form {
   max-width: 450px;
   font-size: 0.8rem;
   display: grid;
-  grid-template-rows: repeat(6, max-content);
+  grid-template-rows: repeat(3, max-content);
   grid-row-gap: 1.5rem;
-}
-
-.select {
-  height: $formElementHeight;
-  width: 100%;
-  border-radius: 4px;
-  border: solid 1px $formBorderColor;
-  padding: 0 1rem;
-  font-size: 1rem;
-  color: $textColor;
-
-  &:focus {
-    border: 2px solid lightgray;
-    outline: none;
-    box-shadow: 0 0 2px lightgray;
-  }
-}
-
-.option {
-  font-size: 1rem;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.ShowCode {
-  position: absolute;
-  left: 0;
 }
 </style>
