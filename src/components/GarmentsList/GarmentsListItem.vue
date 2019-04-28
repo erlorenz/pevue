@@ -48,6 +48,10 @@ export default {
 
 .cell {
   padding: 0.3rem;
+
+  @include desktop-up {
+    padding: 0.5rem;
+  }
 }
 
 .GarmentsListItem {
@@ -55,6 +59,10 @@ export default {
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:first-child .cell {
+    padding-top: 0.8rem;
   }
 }
 </style>

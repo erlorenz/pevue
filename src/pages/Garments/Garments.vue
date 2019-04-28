@@ -60,6 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  font-size: 0.9rem;
 
   @include desktop-up {
     flex-direction: row;
@@ -72,6 +73,10 @@ export default {
   width: 100%;
   padding: 1rem;
   background: white;
+
+  @include desktop-up {
+    padding: 1.8rem;
+  }
 }
 
 .GarmentsList {

@@ -6,8 +6,8 @@
     <table v-if="garments.length">
       <thead>
         <tr>
-          <th class="head">Item</th>
-          <th class="hea align-right">Quantity</th>
+          <th class="head align-left">Item</th>
+          <th class="head">Quantity</th>
           <th class="head align-right">Subtotal</th>
         </tr>
       </thead>
@@ -62,6 +62,7 @@ export default {
   border-bottom: 1px solid lightgray;
   padding: 0.3rem;
   text-align: center;
+  font-size: 0.8rem;
 }
 
 .head:nth-child(1) {
@@ -69,21 +70,24 @@ export default {
 }
 
 .head:nth-child(2) {
-  width: 20%;
+  width: 90px;
 }
 
 .head:nth-child(3) {
-  width: 150px;
+  width: 70px;
 }
 
 .align-right {
   text-align: right;
 }
 
+.align-left {
+  text-align: left;
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
-  margin-left: 4rem;
 }
 
 .cell {

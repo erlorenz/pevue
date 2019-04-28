@@ -1,7 +1,7 @@
 <template>
   <tr class="GarmentsCartItem" @click="handleClick">
     <td class="cell">{{ item.description }}</td>
-    <td class="cell align-right">{{ item.quantity }}</td>
+    <td class="cell align-center">{{ item.quantity }}</td>
     <td class="cell flex-between">
       <span class="dollar-sign">$</span>
       {{ subtotal | formatPrice }}
@@ -49,12 +49,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.align-right {
-  text-align: right;
-}
-
-.dollar-sign {
-  margin-left: 4rem;
+.align-center {
+  text-align: center;
 }
 
 .flex-between {
@@ -64,6 +60,10 @@ export default {
 
 .cell {
   padding: 0.3rem;
+
+  @include desktop-up {
+    padding: 0.5rem;
+  }
 }
 
 .GarmentsCartItem {
@@ -71,6 +71,14 @@ export default {
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:first-child .cell {
+    padding-top: 0.8rem;
+  }
+
+  &:nth-last-child(2) .cell {
+    padding-bottom: 0.8rem;
   }
 }
 </style>

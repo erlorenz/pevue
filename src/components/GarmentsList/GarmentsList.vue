@@ -44,6 +44,10 @@ export default {
 .head {
   border-bottom: 1px solid lightgray;
   padding: 0.3rem;
+
+  &:last-child {
+    width: 70px;
+  }
 }
 
 .align-right {

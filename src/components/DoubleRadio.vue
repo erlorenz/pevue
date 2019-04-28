@@ -19,9 +19,14 @@
           @change="leftClicked"
         />
         <RadioButton :selected="value === leftValue" />
-        <span class="radio-text">
+        <span class="radio-text small">
           <span v-if="isToday">Today,</span>
           <span v-if="!isToday">{{ times.val1.toFormat('EEE') }}</span>
+          {{ ' ' + times.val1.toFormat('M/d') }}
+        </span>
+        <span class="radio-text big">
+          <span v-if="isToday">Today,</span>
+          <span v-if="!isToday">{{ times.val1.toFormat('EEEE') }}</span>
           {{ ' ' + times.val1.toFormat('M/d') }}
         </span>
       </label>
@@ -40,12 +45,12 @@
           @change="rightClicked"
         />
         <RadioButton :selected="value === rightValue" />
-        <span class="radio-text big">
-          {{ times.val2.toFormat('EEEE, M/d') }}
-        </span>
-        <span class="radio-text small">{{
-          times.val2.toFormat('EEE, M/d')
+        <span class="radio-text big">{{
+          times.val2.toFormat('EEEE, M/d')
         }}</span>
+        <span class="radio-text small">
+          {{ times.val2.toFormat('EEE, M/d') }}
+        </span>
       </label>
     </div>
   </div>
@@ -134,6 +139,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &.selected {
     // border-color: $buttonColor;
