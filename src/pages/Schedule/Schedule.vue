@@ -5,28 +5,28 @@
       We will pick your garments up after the selected pickup time and return
       them before the selected return time. (All times are in Pacific Time)
     </PageInstructions>
-    <form class="schedule-form">
+    <form class="schedule-form" @submit.prevent="handleForward">
       <DoubleRadio
-        v-model="pickupDate"
+        v-model="formData.pickupDate"
         label="Pickup Date"
         :times="pickupDates"
       />
       <RadioGroup
-        v-model="pickupHour"
+        v-model="formData.pickupHour"
         label="Pickup Time"
         :times="pickupHours"
       />
       <DoubleRadio
-        v-model="returnDate"
+        v-model="formData.returnDate"
         label="Return Date"
         :times="returnDates"
       />
       <RadioGroup
-        v-model="returnHour"
+        v-model="formData.returnHour"
         label="Return Time"
         :times="returnHours"
       />
-      <select id="hotel" v-model="hotel" name="hotel" class="select">
+      <select id="hotel" v-model="formData.hotel" name="hotel" class="select">
         <option
           v-for="hotelName in hotelList"
           :key="hotelName"
@@ -35,8 +35,12 @@
           >{{ hotelName }}</option
         >
       </select>
-      <InputGroup v-model="room" name="room" label="Room Number" />
-      <BottomBar @back-clicked="handleBackward" @next-clicked="handleForward" />
+      <InputGroup v-model="formData.room" name="room" label="Room Number" />
+      <BottomBar
+        :disabled="!isFilledOut"
+        @back-clicked="handleBack"
+        @next-clicked="handleForward"
+      />
     </form>
   </div>
 </template>
@@ -55,6 +59,7 @@ import {
 import RadioGroup from '@/components/RadioGroup';
 import InputGroup from '@/components/InputGroup';
 import hotelList from '@/utils/hotelList.js';
+import { ADD_SCHEDULE } from '../../store/schedule';
 
 export default {
   name: 'Schedule',
@@ -70,12 +75,14 @@ export default {
 
   data() {
     return {
-      pickupDate: '',
-      pickupHour: '',
-      returnDate: '',
-      returnHour: '',
-      hotel: '',
-      room: '',
+      formData: {
+        pickupDate: '',
+        pickupHour: '',
+        returnDate: '',
+        returnHour: '',
+        hotel: '',
+        room: '',
+      },
     };
   },
 
@@ -84,33 +91,38 @@ export default {
       return pickupDate();
     },
     pickupHours() {
-      return pickupTimes(this.pickupDate);
+      return pickupTimes(this.formData.pickupDate);
     },
     returnDates() {
-      return returnDate(this.pickupHour);
+      return returnDate(this.formData.pickupHour);
     },
     returnHours() {
-      return returnTimes(this.returnDate, this.pickupHour);
+      return returnTimes(this.formData.returnDate, this.formData.pickupHour);
     },
     hotelList() {
       return hotelList.sort();
     },
+
+    isFilledOut() {
+      return !!(
+        this.formData.pickupDate &&
+        this.formData.pickupHour &&
+        this.formData.returnDate &&
+        this.formData.returnHour &&
+        this.formData.hotel &&
+        this.formData.room
+      );
+    },
   },
 
   methods: {
-    leftClicked() {
-      console.log('left clicked');
-    },
-
-    rightClicked() {
-      console.log('right clicked');
-    },
-
     handleForward() {
+      const payload = this.formData;
+      this.$store.commit(ADD_SCHEDULE, payload);
       this.$router.push({ name: 'garments' });
     },
 
-    handleBackward() {
+    handleBack() {
       alert('Back to landing');
     },
   },

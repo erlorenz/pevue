@@ -14,6 +14,7 @@
         <button
           class="forward-button button"
           type="button"
+          :disabled="disabled"
           @click="$emit('next-clicked')"
         >
           Next
@@ -27,6 +28,13 @@
 <script>
 export default {
   name: 'BottomBar',
+
+  props: {
+    disabled: {
+      type: Boolean,
+      default: true,
+    },
+  },
 };
 </script>
 

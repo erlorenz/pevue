@@ -9,7 +9,11 @@
       <GarmentsList />
       <GarmentsCart />
     </div>
-    <BottomBar @back-clicked="handleBackward" @next-clicked="handleForward" />
+    <BottomBar
+      :disabled="!$store.state.garments.garments.length"
+      @back-clicked="handleBackward"
+      @next-clicked="handleForward"
+    />
   </div>
 </template>
 
