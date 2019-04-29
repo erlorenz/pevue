@@ -5,19 +5,18 @@
       <label
         v-for="time in times"
         :key="time.valueOf()"
-        for="time"
+        :for="name + time.valueOf()"
         class="radio-label"
         :class="{ selected: value === time.valueOf().toString() }"
-        @click="$emit('change', time.valueOf().toString())"
       >
-        <!-- <input
-          id="time"
+        <input
+          :id="name + time.valueOf()"
           type="radio"
-          :checked="value === "
-          :value
+          :checked="value === time.valueOf().toString()"
+          :value="time.valueOf().toString()"
           class="hidden"
-          @change
-        />-->
+          @change="$emit('change', time.valueOf().toString())"
+        />
         <RadioButton :selected="value === time.valueOf().toString()" />
         <span class="radio-text">{{ time.toFormat('t') }}</span>
       </label>
@@ -51,6 +50,10 @@ export default {
       default: () => [],
     },
     label: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },

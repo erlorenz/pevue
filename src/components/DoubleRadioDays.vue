@@ -5,13 +5,12 @@
     <div v-if="rightValue" class="container">
       <label
         v-if="leftValue"
-        for="leftButton"
+        :for="name + 'left'"
         class="radio-label"
         :class="{ selected: value === leftValue }"
-        @click="leftClicked"
       >
         <input
-          id="leftButton"
+          :id="name + 'left'"
           type="radio"
           :checked="value === leftValue"
           :value="leftValue"
@@ -31,13 +30,12 @@
         </span>
       </label>
       <label
-        for="rightButton"
+        :for="name + 'right'"
         class="radio-label"
         :class="{ selected: value === rightValue }"
-        @click="rightClicked"
       >
         <input
-          id="rightButton"
+          :id="name + 'right'"
           type="radio"
           :checked="value === rightValue"
           :value="rightValue"
@@ -45,12 +43,12 @@
           @change="rightClicked"
         />
         <RadioButton :selected="value === rightValue" />
-        <span class="radio-text big">
-          {{ times.val2.toFormat('EEEE, M/d') }}
-        </span>
-        <span class="radio-text small">{{
-          times.val2.toFormat('EEE, M/d')
+        <span class="radio-text big">{{
+          times.val2.toFormat('EEEE, M/d')
         }}</span>
+        <span class="radio-text small">
+          {{ times.val2.toFormat('EEE, M/d') }}
+        </span>
       </label>
     </div>
   </div>
@@ -82,6 +80,10 @@ export default {
       default: () => ({}),
     },
     label: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },

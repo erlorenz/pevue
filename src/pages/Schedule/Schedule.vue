@@ -10,21 +10,25 @@
         v-model="$v.formData.pickupDate.$model"
         label="Pickup Date"
         :times="pickupDates"
+        name="pickupdates"
       />
       <RadioGroup
         v-model="$v.formData.pickupHour.$model"
         label="Pickup Time"
         :times="pickupHours"
+        name="pickuphours"
       />
       <DoubleRadioDays
         v-model="$v.formData.returnDate.$model"
         label="Return Date"
         :times="returnDates"
+        name="returndates"
       />
       <RadioGroup
         v-model="$v.formData.returnHour.$model"
         label="Return Time"
         :times="returnHours"
+        name="returnhours"
       />
       <select
         id="hotel"
@@ -130,7 +134,9 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() {
+    this.formData = this.$store.state.schedule.schedule;
+  },
 
   methods: {
     handleForward() {
