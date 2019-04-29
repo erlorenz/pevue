@@ -1,6 +1,8 @@
 <template>
   <div class="layout">
-    <router-view />
+    <transition name="fade" mode="out-in" appear>
+      <router-view />
+    </transition>
     <TheTopbar />
   </div>
 </template>
@@ -26,5 +28,18 @@ export default {
   @include desktop-up {
     padding: 5rem 0;
   }
+}
+
+.fade-enter-active {
+  transition: 0.2s opacity ease;
+}
+
+.fade-leave-active {
+  transition: 0.2s opacity ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>

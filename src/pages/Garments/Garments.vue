@@ -6,8 +6,12 @@
       1.
     </PageInstructions>
     <div class="flex-container">
-      <GarmentsList />
-      <GarmentsCart />
+      <transition>
+        <GarmentsList />
+      </transition>
+      <transition>
+        <GarmentsCart />
+      </transition>
     </div>
     <BottomBar
       :disabled="!$store.state.garments.garments.length"

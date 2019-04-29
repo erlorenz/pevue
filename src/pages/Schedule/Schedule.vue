@@ -130,6 +130,8 @@ export default {
     },
   },
 
+  mounted() {},
+
   methods: {
     handleForward() {
       const payload = this.formData;
