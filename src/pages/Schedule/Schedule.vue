@@ -63,14 +63,12 @@
           error-message="Please fill in your room number."
         />
       </transition>
-
-      <!-- <ShowCode>{{ $v }}</ShowCode> -->
-      <BottomBar
-        :disabled="$v.formData.$invalid"
-        @back-clicked="handleBack"
-        @next-clicked="handleForward"
-      />
     </form>
+    <BottomBar
+      :disabled="$v.formData.$invalid"
+      @back-clicked="handleBack"
+      @next-clicked="handleForward"
+    />
   </main>
 </template>
 

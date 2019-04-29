@@ -1,6 +1,6 @@
 <template>
   <div class="InputGroup" :class="{ error: error }">
-    <label :for="name" class="label">{{ label }}</label>
+    <FormLabel :id="name">{{ label }}</FormLabel>
     <textarea
       v-if="textarea"
       :id="name"
@@ -25,8 +25,14 @@
 </template>
 
 <script>
+import FormLabel from '@/components/FormLabel';
+
 export default {
   name: 'InputGroup',
+
+  components: {
+    FormLabel,
+  },
 
   props: {
     value: {
@@ -72,13 +78,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.label {
-  font-size: $formLabelSize;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
 .input,
 .text-area {
   height: $formElementHeight;

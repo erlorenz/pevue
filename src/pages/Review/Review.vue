@@ -37,12 +37,12 @@
           label="Add any special instructions"
         />
       </transition>
-      <BottomBar
-        :disabled="$v.$invalid"
-        @back-clicked="handleBack"
-        @next-clicked="handleForward"
-      />
     </form>
+    <BottomBar
+      :disabled="$v.$invalid"
+      @back-clicked="handleBack"
+      @next-clicked="handleForward"
+    />
   </main>
 </template>
 
@@ -56,6 +56,7 @@ import { ADD_OPTIONS } from '../../store/options';
 import { required } from 'vuelidate/lib/validators';
 import GarmentsCart from '@/components/GarmentsCart/GarmentsCart';
 import ReviewSchedule from '@/components/ReviewSchedule';
+import addStripe from '@/utils/addStripe';
 
 export default {
   name: 'Review',
@@ -86,6 +87,8 @@ export default {
       return this.$store.getters.includesShirt;
     },
   },
+
+  mounted: addStripe(),
 
   methods: {
     handleForward() {

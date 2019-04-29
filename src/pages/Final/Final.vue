@@ -1,11 +1,11 @@
 <template>
   <main class="Final">
-    <PageTitle>Does Everything Look Good?</PageTitle>
+    <PageTitle>Finalize Your Order</PageTitle>
     <PageInstructions>
-      Review your selected times and garments - you can go back to edit by
-      clicking on the times and chosen garments below.
-      <br />Also choose any available options and add special instructions.
-      <br />Terms and conditions are at the bottom.
+      Fill out the remaining information and click finish.
+      <br />
+      When the transaction is completed you'll receive an email receipt and a
+      text/SMS update.
     </PageInstructions>
 
     <form class="final-form" @submit.prevent="handleForward">
@@ -41,12 +41,18 @@
           @change="$v.phone.$touch"
         />
       </transition>
-      <BottomBar
-        :disabled="$v.$invalid"
-        @back-clicked="handleBack"
-        @next-clicked="handleForward"
-      />
+      <transition name="slide-up" appear>
+        <div class="stripe-group">
+          <FormLabel>Card Details</FormLabel>
+          <div id="stripe-card-element">Stripe Card Element Here</div>
+        </div>
+      </transition>
     </form>
+    <BottomBar
+      :disabled="$v.$invalid"
+      @back-clicked="handleBack"
+      @next-clicked="handleForward"
+    />
   </main>
 </template>
 
@@ -55,6 +61,7 @@ import PageInstructions from '@/components/PageInstructions.vue';
 import PageTitle from '@/components/PageTitle.vue';
 import BottomBar from '@/components/BottomBar.vue';
 import InputGroup from '@/components/InputGroup';
+import FormLabel from '@/components/FormLabel';
 import {
   required,
   email,
@@ -70,6 +77,7 @@ export default {
     PageTitle,
     BottomBar,
     InputGroup,
+    FormLabel,
   },
 
   data() {
@@ -86,7 +94,9 @@ export default {
     email: { required, email },
   },
 
-  computed: {},
+  created() {
+    console.log(window.Stripe);
+  },
 
   methods: {
     handleForward() {
@@ -120,6 +130,23 @@ export default {
   display: grid;
   grid-template-rows: repeat(4, max-content);
   grid-row-gap: 1.5rem;
+}
+
+#stripe-card-element {
+  height: $formElementHeight;
+  width: 100%;
+  border-radius: 4px;
+  border: solid 1px $formBorderColor;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: $textColor;
+  background-color: white;
+
+  &:focus {
+    outline: none;
+    border: 2px solid lightgray;
+    box-shadow: 0 0 2px lightgray;
+  }
 }
 
 .slide-up-enter {

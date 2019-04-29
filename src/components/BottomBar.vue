@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <div class="bottom-bar">
-      <div class="container">
-        <button
-          class="back-button button"
-          type="button"
-          @click="$emit('back-clicked')"
-        >
-          <span class="left-arrow">&lt;</span>
-          Back
-        </button>
-        <button
-          class="forward-button button"
-          type="button"
-          :disabled="disabled"
-          @click="$emit('next-clicked')"
-        >
-          Next
-          <span class="right-arrow">></span>
-        </button>
-      </div>
+  <div class="BottomBar">
+    <div class="container">
+      <button
+        class="back-button button"
+        type="button"
+        @click="$emit('back-clicked')"
+      >
+        <span class="left-arrow">&lt;</span>
+        Back
+      </button>
+      <button
+        class="forward-button button"
+        type="button"
+        :disabled="disabled"
+        @click="$emit('next-clicked')"
+      >
+        Next
+        <span class="right-arrow">></span>
+      </button>
     </div>
   </div>
 </template>
@@ -38,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bottom-bar {
+.BottomBar {
   position: fixed;
   bottom: 0;
   left: 0;

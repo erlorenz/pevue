@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <main class="Garments">
     <PageTitle>What are we doing for you?</PageTitle>
     <PageInstructions>
       Click an item to add 1 to your cart. Click the item in the cart to remove
@@ -18,7 +18,7 @@
       @back-clicked="handleBackward"
       @next-clicked="handleForward"
     />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.Garments {
   display: flex;
   flex-direction: column;
   align-items: center;
