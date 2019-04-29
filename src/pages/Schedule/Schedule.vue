@@ -6,51 +6,64 @@
       them before the selected return time. (All times are in Pacific Time)
     </PageInstructions>
     <form class="schedule-form" @submit.prevent="handleForward">
-      <DoubleRadioDays
-        v-model="$v.formData.pickupDate.$model"
-        label="Pickup Date"
-        :times="pickupDates"
-        name="pickupdates"
-      />
-      <RadioGroup
-        v-model="$v.formData.pickupHour.$model"
-        label="Pickup Time"
-        :times="pickupHours"
-        name="pickuphours"
-      />
-      <DoubleRadioDays
-        v-model="$v.formData.returnDate.$model"
-        label="Return Date"
-        :times="returnDates"
-        name="returndates"
-      />
-      <RadioGroup
-        v-model="$v.formData.returnHour.$model"
-        label="Return Time"
-        :times="returnHours"
-        name="returnhours"
-      />
-      <select
-        id="hotel"
-        v-model="$v.formData.hotel.$model"
-        name="hotel"
-        class="select"
-      >
-        <option
-          v-for="hotelName in hotelList"
-          :key="hotelName"
-          :value="hotelName"
-          class="option"
-          >{{ hotelName }}</option
+      <transition name="slide-up" appear>
+        <DoubleRadioDays
+          v-model="$v.formData.pickupDate.$model"
+          label="Pickup Date"
+          :times="pickupDates"
+          name="pickupdates"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <RadioGroup
+          v-model="$v.formData.pickupHour.$model"
+          label="Pickup Time"
+          :times="pickupHours"
+          name="pickuphours"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <DoubleRadioDays
+          v-model="$v.formData.returnDate.$model"
+          label="Return Date"
+          :times="returnDates"
+          name="returndates"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <RadioGroup
+          v-model="$v.formData.returnHour.$model"
+          label="Return Time"
+          :times="returnHours"
+          name="returnhours"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <select
+          id="hotel"
+          v-model="$v.formData.hotel.$model"
+          name="hotel"
+          class="select"
         >
-      </select>
-      <InputGroup
-        v-model="$v.formData.room.$model"
-        name="room"
-        label="Room Number"
-        :error="$v.formData.room.$error"
-        error-message="Please fill in your room number."
-      />
+          <option
+            v-for="hotelName in hotelList"
+            :key="hotelName"
+            :value="hotelName"
+            class="option"
+            >{{ hotelName }}</option
+          >
+        </select>
+      </transition>
+      <transition name="slide-up" appear>
+        <InputGroup
+          v-model="$v.formData.room.$model"
+          name="room"
+          label="Room Number"
+          :error="$v.formData.room.$error"
+          error-message="Please fill in your room number."
+        />
+      </transition>
+
       <!-- <ShowCode>{{ $v }}</ShowCode> -->
       <BottomBar
         :disabled="$v.formData.$invalid"
@@ -201,5 +214,13 @@ export default {
 .ShowCode {
   position: absolute;
   left: 0;
+}
+
+.slide-up-enter {
+  transform: translateY(10px);
+}
+
+.slide-up-enter-active {
+  transition: transform 0.5s ease-out;
 }
 </style>

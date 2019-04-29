@@ -7,28 +7,36 @@
       <br />Also choose any available options and add special instructions.
       <br />Terms and conditions are at the bottom.
     </PageInstructions>
-    <router-link :to="{ name: 'schedule' }" class="link">
-      <ReviewSchedule />
-    </router-link>
-    <router-link :to="{ name: 'garments' }" class="link">
-      <GarmentsCart />
-    </router-link>
+    <transition name="slide-up" appear>
+      <router-link :to="{ name: 'schedule' }" class="link">
+        <ReviewSchedule />
+      </router-link>
+    </transition>
+    <transition name="slide-up" appear>
+      <router-link :to="{ name: 'garments' }" class="link">
+        <GarmentsCart />
+      </router-link>
+    </transition>
     <form class="review-form" @submit.prevent="handleForward">
       <!-- Only include starched option if there is a dress shirt -->
-      <DoubleRadio
-        v-if="includesShirt"
-        v-model="$v.starch.$model"
-        :values="['light', 'none']"
-        left-text="Light"
-        right-text="None"
-        label="Should we starch your dress shirt(s)?"
-      />
-      <InputGroup
-        v-model="specialInstructions"
-        textarea
-        name="special-instructions"
-        label="Add any special instructions"
-      />
+      <transition name="slide-up" appear>
+        <DoubleRadio
+          v-if="includesShirt"
+          v-model="$v.starch.$model"
+          :values="['light', 'none']"
+          left-text="Light"
+          right-text="None"
+          label="Should we starch your dress shirt(s)?"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <InputGroup
+          v-model="specialInstructions"
+          textarea
+          name="special-instructions"
+          label="Add any special instructions"
+        />
+      </transition>
       <BottomBar
         :disabled="$v.$invalid"
         @back-clicked="handleBack"
@@ -122,5 +130,13 @@ export default {
   display: grid;
   grid-template-rows: repeat(3, max-content);
   grid-row-gap: 1.5rem;
+}
+
+.slide-up-enter {
+  transform: translateY(10px);
+}
+
+.slide-up-enter-active {
+  transition: transform 0.5s ease-out;
 }
 </style>

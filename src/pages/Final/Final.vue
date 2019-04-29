@@ -9,32 +9,38 @@
     </PageInstructions>
 
     <form class="final-form" @submit.prevent="handleForward">
-      <InputGroup
-        v-model.trim="name"
-        name="name"
-        label="Full Name"
-        :error="$v.name.$error"
-        error-message="Please enter your first and last name."
-        @change="$v.name.$touch"
-      />
-      <InputGroup
-        v-model.trim="email"
-        name="email"
-        type="email"
-        label="Email Address"
-        :error="$v.email.$error"
-        error-message="Please enter a valid email address so we can send a receipt."
-        @change="$v.email.$touch"
-      />
-      <InputGroup
-        v-model="phone"
-        name="phone"
-        type="number"
-        label="10-Digit Phone Number"
-        :error="$v.phone.$error"
-        error-message="Please enter 10 digit phone number so we can update you via sms."
-        @change="$v.phone.$touch"
-      />
+      <transition name="slide-up" appear>
+        <InputGroup
+          v-model.trim="name"
+          name="name"
+          label="Full Name"
+          :error="$v.name.$error"
+          error-message="Please enter your first and last name."
+          @change="$v.name.$touch"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <InputGroup
+          v-model.trim="email"
+          name="email"
+          type="email"
+          label="Email Address"
+          :error="$v.email.$error"
+          error-message="Please enter a valid email address so we can send a receipt."
+          @change="$v.email.$touch"
+        />
+      </transition>
+      <transition name="slide-up" appear>
+        <InputGroup
+          v-model="phone"
+          name="phone"
+          type="number"
+          label="10-Digit Phone Number"
+          :error="$v.phone.$error"
+          error-message="Please enter 10 digit phone number so we can update you via sms."
+          @change="$v.phone.$touch"
+        />
+      </transition>
       <BottomBar
         :disabled="$v.$invalid"
         @back-clicked="handleBack"
@@ -114,5 +120,13 @@ export default {
   display: grid;
   grid-template-rows: repeat(4, max-content);
   grid-row-gap: 1.5rem;
+}
+
+.slide-up-enter {
+  transform: translateY(10px);
+}
+
+.slide-up-enter-active {
+  transition: transform 0.5s ease-out;
 }
 </style>

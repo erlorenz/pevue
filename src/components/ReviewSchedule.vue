@@ -6,9 +6,9 @@
       <div class="grid-item head">Return:</div>
       <div class="grid-item">{{ returnTime }}</div>
       <div class="grid-item head">Hotel:</div>
-      <div class="grid-item">6</div>
+      <div class="grid-item">{{ hotel }}</div>
       <div class="grid-item head">Room:</div>
-      <div class="grid-item">8</div>
+      <div class="grid-item">{{ room }}</div>
     </div>
   </div>
 </template>
@@ -43,6 +43,12 @@ export default {
         dateInPST.toFormat('t') +
         ' PST'
       );
+    },
+    hotel() {
+      return this.$store.state.schedule.schedule.hotel;
+    },
+    room() {
+      return this.$store.state.schedule.schedule.room;
     },
   },
 };

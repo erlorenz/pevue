@@ -6,10 +6,10 @@
       1.
     </PageInstructions>
     <div class="flex-container">
-      <transition>
+      <transition name="slide-up" appear>
         <GarmentsList />
       </transition>
-      <transition>
+      <transition name="slide-up" appear>
         <GarmentsCart />
       </transition>
     </div>
@@ -94,5 +94,13 @@ export default {
     margin-right: 3rem;
     margin-bottom: 0;
   }
+}
+
+.slide-up-enter {
+  transform: translateY(10px);
+}
+
+.slide-up-enter-active {
+  transition: transform 0.5s ease-out;
 }
 </style>

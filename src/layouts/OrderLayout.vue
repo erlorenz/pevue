@@ -31,11 +31,11 @@ export default {
 }
 
 .fade-enter-active {
-  transition: 0.3s opacity ease;
+  transition: 0.8s opacity ease;
 }
 
 .fade-leave-active {
-  transition: 0.2s opacity ease;
+  transition: 0.3s opacity ease;
 }
 
 .fade-enter,
