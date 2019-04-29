@@ -69,7 +69,7 @@ import {
   minLength,
   maxLength,
 } from 'vuelidate/lib/validators';
-import addStripeElement from '@/utils/addStripeElement';
+import getStripeToken from '@/utils/getStripeToken';
 
 export default {
   name: 'Final',
@@ -87,6 +87,8 @@ export default {
       name: '',
       phone: '',
       email: '',
+      stripe: null,
+      card: null,
     };
   },
 
@@ -97,20 +99,38 @@ export default {
   },
 
   mounted() {
-    addStripeElement(this.$refs.stripecard);
+    const mountElement = () => {
+      const stripe = window.Stripe(process.env.VUE_APP_STRIPE_KEY);
+      this.stripe = stripe;
+      const elements = stripe.elements();
+      const card = elements.create('card');
+      this.card = card;
+      card.mount(this.$refs.stripecard);
+    };
+
+    // Check if stripe exists otherwise mount when loaded
+    if (window.Stripe) {
+      mountElement();
+    } else {
+      document.getElementById('stripe-js').addEventListener('load', () => {
+        mountElement();
+      });
+    }
   },
 
   methods: {
     handleForward() {
       if (!this.$v.$invalid) {
-        console.log('submit');
+        this.pay();
       } else {
         console.log('No way!');
       }
     },
-
     handleBack() {
       this.$router.push({ name: 'review' });
+    },
+    async pay() {
+      await getStripeToken(this.stripe, this.card);
     },
   },
 };
