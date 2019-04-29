@@ -3,9 +3,8 @@
     <PageTitle>Finalize Your Order</PageTitle>
     <PageInstructions>
       Fill out the remaining information and click finish.
-      <br />
-      When the transaction is completed you'll receive an email receipt and a
-      text/SMS update.
+      <br />When the transaction is completed you'll receive an email receipt
+      and a text/SMS update.
     </PageInstructions>
 
     <form class="final-form" @submit.prevent="handleForward">
@@ -44,7 +43,9 @@
       <transition name="slide-up" appear>
         <div class="stripe-group">
           <FormLabel>Card Details</FormLabel>
-          <div id="stripe-card-element">Stripe Card Element Here</div>
+          <div id="stripe-card-element" ref="stripecard">
+            Stripe Card Element Here
+          </div>
         </div>
       </transition>
     </form>
@@ -68,6 +69,7 @@ import {
   minLength,
   maxLength,
 } from 'vuelidate/lib/validators';
+import addStripeElement from '@/utils/addStripeElement';
 
 export default {
   name: 'Final',
@@ -94,8 +96,8 @@ export default {
     email: { required, email },
   },
 
-  created() {
-    console.log(window.Stripe);
+  mounted() {
+    addStripeElement(this.$refs.stripecard);
   },
 
   methods: {
@@ -132,20 +134,24 @@ export default {
   grid-row-gap: 1.5rem;
 }
 
-#stripe-card-element {
+.StripeElement {
   height: $formElementHeight;
-  width: 100%;
-  border-radius: 4px;
-  border: solid 1px $formBorderColor;
-  padding: 0 1rem;
-  font-size: 1rem;
-  color: $textColor;
   background-color: white;
+  padding: 1rem 0.7rem;
+  border: 1px solid $formBorderColor;
+  border-radius: 4px;
 
-  &:focus {
+  &--focus {
     outline: none;
     border: 2px solid lightgray;
     box-shadow: 0 0 2px lightgray;
+  }
+
+  &--invalid {
+    border-color: $errorColor;
+    animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate(0, 0);
+    perspective: 1000;
   }
 }
 
@@ -155,5 +161,25 @@ export default {
 
 .slide-up-enter-active {
   transition: transform 0.5s ease-out;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translatX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
 }
 </style>

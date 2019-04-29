@@ -56,7 +56,6 @@ import { ADD_OPTIONS } from '../../store/options';
 import { required } from 'vuelidate/lib/validators';
 import GarmentsCart from '@/components/GarmentsCart/GarmentsCart';
 import ReviewSchedule from '@/components/ReviewSchedule';
-import addStripe from '@/utils/addStripe';
 
 export default {
   name: 'Review',
@@ -87,8 +86,6 @@ export default {
       return this.$store.getters.includesShirt;
     },
   },
-
-  mounted: addStripe(),
 
   methods: {
     handleForward() {
